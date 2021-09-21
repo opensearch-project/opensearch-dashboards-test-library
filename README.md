@@ -8,7 +8,9 @@
 
 ## Welcome!
 
-**OpenSearch** is [a community-driven, open source fork](https://aws.amazon.com/blogs/opensource/introducing-opensearch/) of [Elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch) and [Kibana](https://en.wikipedia.org/wiki/Kibana) licensed under the [Apache v2.0 License](LICENSE.txt). For more information, see [opensearch.org](https://opensearch.org/).
+**OpenSearch**
+
+**Open Search Dashboards Test Library** provides utility functions, page object models, test fixture hanlding for developers to write functional tests for OpenSearch Dashboards and dashboards plugins. It is licensed under the [Apache v2.0 License](LICENSE.txt) and can be imported by test case repositories.
 
 ## Project Resources
 
