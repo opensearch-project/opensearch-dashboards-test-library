@@ -8,9 +8,7 @@
 
 ## Welcome!
 
-**OpenSearch**
-
-**Open Search Dashboards Test Library** provides utility functions, page object models, test fixture hanlding for developers to write functional tests for OpenSearch Dashboards and dashboards plugins. It is licensed under the [Apache v2.0 License](LICENSE.txt) and can be imported by test case repositories.
+**Open Search Dashboards Test Library** provides utility functions, page object models, test fixture hanlding for developers to write functional tests for [OpenSearch Dashboards](https://github.com/opensearch-project/OpenSearch-Dashboards) and dashboards plugins. It is licensed under the [Apache v2.0 License](LICENSE.txt) and can be imported by test case repositories.
 
 ## Project Resources
 
