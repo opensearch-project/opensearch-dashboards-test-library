@@ -1,0 +1,20 @@
+{
+  "name": "@opensearch-dashboards-test/opensearch-dashboards-test-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opensearch-project/opensearch-dashboards-test-library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/opensearch-project/opensearch-dashboards-test-library/issues"
+  },
+  "homepage": "https://github.com/opensearch-project/opensearch-dashboards-test-library"
+}
