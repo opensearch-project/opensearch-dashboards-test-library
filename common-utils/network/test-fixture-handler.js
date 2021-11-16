@@ -1,9 +1,8 @@
 export class TestFixtureHandler {
 
-  constructor(inputTestRunner, hostname = 'localhost', port = '9200') {
+  constructor(inputTestRunner, openSearchUrl = 'localhost:9200') {
       this.testRunner = inputTestRunner;
-      this.hostname = hostname;
-      this.port = port;
+      this.openSearchUrl = openSearchUrl;
   }
   
   /**
@@ -21,7 +20,7 @@ export class TestFixtureHandler {
         const json = JSON.parse(element)
         if (json.type === 'index') {
           const indexContent = parseIndex(json.value)
-          this.testRunner.request({ method: 'PUT', url: `${this.hostname}:${this.port}/${indexContent.index}`, body: indexContent.body, failOnStatusCode: false }).then((response) => {
+          this.testRunner.request({ method: 'PUT', url: `${this.openSearchUrl}/${indexContent.index}`, body: indexContent.body, failOnStatusCode: false }).then((response) => {
   
           })
         }
@@ -40,7 +39,7 @@ export class TestFixtureHandler {
           const json = JSON.parse(element)
           if (json.type === 'index') {
             const index = json.value.index
-            this.testRunner.request({ method: 'DELETE', url: `${this.hostname}:${this.port}/${index}`, failOnStatusCode: false }).then((response) => {
+            this.testRunner.request({ method: 'DELETE', url: `${this.openSearchUrl}/${index}`, failOnStatusCode: false }).then((response) => {
             })
           }
       })
@@ -61,8 +60,8 @@ export class TestFixtureHandler {
       return bulkOperation
     }
   
-    const sendBulkAPIRequest = (bodyArray, hostname, port) => {
-      this.testRunner.request({ headers: { 'Content-Type': 'application/json' }, method: 'POST', url: `${hostname}:${port}/_bulk`, body: `${bodyArray.join('\n')}\n`, timeout: 30000 }).then((response) => {
+    const sendBulkAPIRequest = (bodyArray, openSearchUrl) => {
+      this.testRunner.request({ headers: { 'Content-Type': 'application/json' }, method: 'POST', url: `${openSearchUrl}/_bulk`, body: `${bodyArray.join('\n')}\n`, timeout: 30000 }).then((response) => {
   
       })
     }
@@ -75,16 +74,16 @@ export class TestFixtureHandler {
   
         readJSONCount++
         if (readJSONCount % bulkMax === 0) {
-          sendBulkAPIRequest(bulkLines.pop(), this.hostname, this.port)
+          sendBulkAPIRequest(bulkLines.pop(), this.openSearchUrl)
           bulkLines.push([])
         }
       })
   
       if (bulkLines.length > 0) {
-        sendBulkAPIRequest(bulkLines.pop(), this.hostname, this.port)
+        sendBulkAPIRequest(bulkLines.pop(), this.openSearchUrl)
       }
   
-      this.testRunner.request({ method: 'POST', url: `${this.hostname}:${this.port}/_all/_refresh` }).then((response) => {
+      this.testRunner.request({ method: 'POST', url: `${this.openSearchUrl}/_all/_refresh` }).then((response) => {
   
       })
     })
