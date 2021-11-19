@@ -10,7 +10,7 @@ export class MiscUtils {
   visitPage(path) {
     this.testRunner.visit(path)
   }
-  
+
   /**
    * Go to the dashboard list page through the navigation side panel
    */
@@ -44,4 +44,46 @@ export class MiscUtils {
     this.testRunner.get('[data-test-subj="queryInput"]').type('{selectall}{backspace}')
     this.testRunner.get('[data-test-subj="querySubmitButton"]').click()
   }
+
+  /**
+   * Add sample data of Sample eCommerce orders, Sample flight data, Sample web logs to dashboard
+   */
+  addSampleData() {
+    this.testRunner.visit('app/home#/tutorial_directory')
+    this.testRunner.get('button[data-test-subj="addSampleDataSetecommerce"]').should('be.visible').click()
+    this.testRunner.get('div[data-test-subj="sampleDataSetCardecommerce"] > span > span[title="INSTALLED"]').should('have.text', 'INSTALLED')
+    this.testRunner.get('button[data-test-subj="addSampleDataSetflights"]').should('be.visible').click()
+    this.testRunner.get('div[data-test-subj="sampleDataSetCardflights"] > span > span[title="INSTALLED"]').should('have.text', 'INSTALLED')
+    this.testRunner.get('button[data-test-subj="addSampleDataSetlogs"]').should('be.visible').click()
+    this.testRunner.get('div[data-test-subj="sampleDataSetCardlogs"] > span > span[title="INSTALLED"]').should('have.text', 'INSTALLED')
+  }
+
+  /**
+   * Remove sample data of Sample eCommerce orders, Sample flight data, Sample web logs to dashboard
+   * 
+   * TODO: Cypress chrome driver can't display the uninstalled notification properly
+   */
+  removeSampleData() {
+    this.testRunner.visit('app/home#/tutorial_directory')
+    this.testRunner.get('button[data-test-subj="removeSampleDataSetecommerce"]').should('be.visible').click()
+    //this.testRunner.get('div[aria-label="Notification"] > span').should('have.text', 'Sample eCommerce orders uninstalled')
+    this.testRunner.get('button[data-test-subj="removeSampleDataSetflights"]').should('be.visible').click()
+    //this.testRunner.get('div[aria-label="Notification"] > span').should('have.text', 'Sample flight data uninstalled')
+    this.testRunner.get('button[data-test-subj="removeSampleDataSetlogs"]').should('be.visible').click()
+    //this.testRunner.get('div[aria-label="Notification"] > span').should('have.text', 'Sample web logs uninstalled')
+  }
+
+  /**
+   * View the sample data dashboard
+   * @param {String} sampleData The sample data name
+   */
+  viewData(sampleData) {
+    this.testRunner.location('pathname').then((loc) => {
+      if (!loc.includes('/tutorial_directory')) {
+        this.testRunner.visit('app/home#/tutorial_directory')
+      }
+      this.testRunner.get(`button[data-test-subj="launchSampleDataSet${sampleData}"]`).should('be.visible').click()
+    })
+  }
+
 }
