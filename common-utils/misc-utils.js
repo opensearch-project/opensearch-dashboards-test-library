@@ -48,14 +48,15 @@ export class MiscUtils {
   /**
    * Add sample data of Sample eCommerce orders, Sample flight data, Sample web logs to dashboard
    */
-  addSampleData() {
+  addSampleData(timeout = 60000) {
+    const timeOut = { timeout: timeout }
     this.testRunner.visit('app/home#/tutorial_directory')
     this.testRunner.get('button[data-test-subj="addSampleDataSetecommerce"]').should('be.visible').click()
-    this.testRunner.get('div[data-test-subj="sampleDataSetCardecommerce"] > span > span[title="INSTALLED"]').should('have.text', 'INSTALLED')
+    this.testRunner.get('div[data-test-subj="sampleDataSetCardecommerce"] > span > span[title="INSTALLED"]', timeOut).should('have.text', 'INSTALLED')
     this.testRunner.get('button[data-test-subj="addSampleDataSetflights"]').should('be.visible').click()
-    this.testRunner.get('div[data-test-subj="sampleDataSetCardflights"] > span > span[title="INSTALLED"]').should('have.text', 'INSTALLED')
+    this.testRunner.get('div[data-test-subj="sampleDataSetCardflights"] > span > span[title="INSTALLED"]', timeOut).should('have.text', 'INSTALLED')
     this.testRunner.get('button[data-test-subj="addSampleDataSetlogs"]').should('be.visible').click()
-    this.testRunner.get('div[data-test-subj="sampleDataSetCardlogs"] > span > span[title="INSTALLED"]').should('have.text', 'INSTALLED')
+    this.testRunner.get('div[data-test-subj="sampleDataSetCardlogs"] > span > span[title="INSTALLED"]', timeOut).should('have.text', 'INSTALLED')
   }
 
   /**
