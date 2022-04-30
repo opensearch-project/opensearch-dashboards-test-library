@@ -16,22 +16,23 @@ export class CommonUI {
 
   /**
    * Sets the page date range
+   * Sets start date first then end date
    * @param {String} start Start datetime to set
    * @param {String} end  End datetime to set
    */
-  setDateRange(start, end) {
+  setDateRange(end, start) {
     this.testRunner.get('[data-test-subj="superDatePickerShowDatesButton"]').should('be.visible').click()
 
-    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').should('be.visible').type(`{selectall}${start}`)
-    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
-    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('not.exist')
-
     this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
+
+    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').should('be.visible').type(`{selectall}${end}`)
-    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('not.exist')
 
     this.testRunner.get('[data-test-subj="querySubmitButton"]').should('be.visible').click()
   }
