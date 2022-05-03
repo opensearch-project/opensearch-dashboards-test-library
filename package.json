@@ -1,7 +1,7 @@
 {
   "name": "@opensearch-dashboards-test/opensearch-dashboards-test-library",
-  "version": "1.0.3",
-  "description": "Provides utility functions, page object models, test fixture hanlding for developers to write functional tests for OpenSearch Dashboards and dashboards plugins",
+  "version": "1.0.4",
+  "description": "Provides utility functions, page object models, test fixture handling for developers to write functional tests for OpenSearch Dashboards and plugins",
   "main": "index.js",
   "type": "module",
   "scripts": {
