@@ -5,8 +5,8 @@ export class CommonUI {
 
   /**
    * Generate a selector string for a filter based on its field attribute.
-   * CAUTION: retrieving the elements associated with the returned selector string 
-   * may produce multiple filters if they all correspond to the same field attribute 
+   * CAUTION: retrieving the elements associated with the returned selector string
+   * may produce multiple filters if they all correspond to the same field attribute
    * @param {String} field Field attribute value of the filter
    * @returns {String}
    */
@@ -85,7 +85,7 @@ export class CommonUI {
    * Attempts to add a specified filter, retrying by reselecting the failed option
    * @param {String} field Field value to select
    * @param {String} operator Operator value to select
-   * @param {String} value Value field input
+   * @param {String | Array<String>} value Value field input
    */
   addFilterRetrySelection(field, operator, value = null, maxRetries = 3) {
     const selectComboBoxInput = (selector, keyword, retry = 0) => {
@@ -107,7 +107,11 @@ export class CommonUI {
     })
 
     if (value != null) {
-      this.testRunner.get('[data-test-subj="filterParams"]').find('input').type(value)
+      if(typeof(value) == 'string'){
+        this.testRunner.get('[data-test-subj="filterParams"]').find('input').type(value)
+      }else{
+        for(let i = 0; i<value.length; i++) this.testRunner.get('[data-test-subj="filterParams"]').find('input').eq(i).type(value[i])
+      }
     }
 
     this.testRunner.get('[data-test-subj="saveFilter"]').click()
