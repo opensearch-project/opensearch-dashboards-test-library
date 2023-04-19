@@ -23,8 +23,10 @@ export class CommonUI {
   setDateRange(end, start) {
     this.testRunner.get('[data-test-subj="superDatePickerShowDatesButton"]').should('be.visible').click()
 
+    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').should('be.visible').type(`{selectall}${start}`)
+    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
 
     this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
