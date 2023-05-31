@@ -118,6 +118,42 @@ export class CommonUI {
     this.testRunner.get(this._generateFilterSearchString(field)).last().should('be.visible')
   }
 
+    /**
+   * Attempts to add a specified filter, retrying by reselecting the failed option
+   * @param {String} field Field value to select
+   * @param {String} operator Operator value to select
+   * @param {String} value1 Value field input
+   * @param {String} value2 Value field input
+   */
+  addFilterRangeRetrySelection(field, operator, value1, value2, maxRetries = 3) {
+    const selectComboBoxInput = (selector, keyword, retry = 0) => {
+      this.testRunner.get(`[data-test-subj="${selector}"]`).find('[data-test-subj="comboBoxInput"]').trigger('focus').type(`{selectall}{backspace}${keyword}`)
+      this.testRunner.get(`[data-test-subj="comboBoxOptionsList ${selector}-optionsList"]`).find(`[title="${keyword}"]`).trigger('click', { force: true })
+      this.testRunner.get(`[data-test-subj="${selector}"]`).then(($box) => {
+        const cls = $box.attr('class')
+        if (cls.includes('euiComboBox-isInvalid') && retry < maxRetries) {
+          this.testRunner.wrap($box).find('[data-test-subj="comboBoxInput"]').type('{selectall}{backspace}')
+          this.testRunner.wrap($box).find('[data-test-subj="comboBoxToggleListButton"]').click()
+          selectComboBoxInput(selector, keyword, retry + 1)
+        }
+      })
+    }
+
+    this.testRunner.get('[data-test-subj="addFilter"]').click().then(() => {
+      selectComboBoxInput('filterFieldSuggestionList', field)
+      selectComboBoxInput('filterOperatorList', operator)
+    })
+
+    this.testRunner.get('[data-test-subj="filterParams"]')
+      .find('input')
+      .first()
+      .type(value1);
+    this.testRunner.get('[data-test-subj="filterParams"]').find('input').last().type(value2);
+
+    this.testRunner.get('[data-test-subj="saveFilter"]').click()
+    this.testRunner.get(this._generateFilterSearchString(field)).last().should('be.visible')
+  }
+
   /**
    * Pins a filter with a specified field attribute and an optional
    * index number representing which position the desired filter is located at
