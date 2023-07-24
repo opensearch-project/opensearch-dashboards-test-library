@@ -21,9 +21,31 @@ export class CommonUI {
    * @param {String} end  End datetime to set
    */
   setDateRange(end, start) {
-    this.testRunner.get('[data-test-subj="superDatePickerShowDatesButton"]').should('be.visible').click()
+    /* Find any one of the two buttons that change/open the date picker:
+     *   * if `superDatePickerShowDatesButton` is clicked, it will switch the mode to dates
+     *      * in some versions of OUI, the switch will open the date selection dialog as well
+     *   * if `superDatePickerstartDatePopoverButton` is clicked, it will open the date selection dialog
+     */
+    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"], [data-test-subj="superDatePickerShowDatesButton"]')
+        .should('be.visible')
+        .invoke('attr', 'data-test-subj')
+        .then((testId) => {
+          this.testRunner.get(`[data-test-subj="${testId}"]`)
+              .should('be.visible')
+              .click();
+        });
 
-    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
+    /* While we surely are in the date selection mode, we don't know if the date selection dialog
+     * is open or not. Looking for a tab and if it is missing, click on the dialog opener.
+     */
+    this.testRunner.get('body').then($body => {
+      if ($body.find('[data-test-subj="superDatePickerAbsoluteTab"]').length === 0) {
+        this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]')
+            .should('be.visible')
+            .click();
+      }
+    });
+
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').should('be.visible').type(`{selectall}${start}`)
     this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
