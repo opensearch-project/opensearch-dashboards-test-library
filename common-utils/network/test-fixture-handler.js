@@ -88,4 +88,26 @@ export class TestFixtureHandler {
       })
     })
   }
+
+  /**
+   * Read docs from a file and import them to OpenSearch only when the indices do not already exist
+   * in order to optimize the data uploading time
+   * @param {string, array} index An index or a set of indices 
+   * @param {string} indexMappingPath File path for mapping data
+   * @param {string} indexDataPath File path for the actual data
+   */
+  importJSONDocIfNeeded(index, indexMappingPath, indexDataPath) {
+    let queryString = '';
+    if (typeof index === 'string') {
+      queryString = index;
+    } else {
+      index.forEach(value => queryString += `${value},`);
+    }
+    cy.getIndices(queryString).then((response) => {
+      if(response.status === 404){
+        this.importJSONMapping(indexMappingPath);
+        this.importJSONDoc(indexDataPath);
+      }
+    });
+  }
 }
