@@ -100,8 +100,10 @@ export class TestFixtureHandler {
     let queryString = '';
     if (typeof index === 'string') {
       queryString = index;
-    } else {
+    } else if (Array.isArray(index)) {
       index.forEach(value => queryString += `${value},`);
+    } else {
+      return;
     }
     cy.getIndices(queryString).then((response) => {
       if(response.status === 404){
