@@ -97,14 +97,10 @@ export class TestFixtureHandler {
    * @param {string} indexDataPath File path for the actual data
    */
   importJSONDocIfNeeded(index, indexMappingPath, indexDataPath) {
-    let queryString = '';
-    if (typeof index === 'string') {
-      queryString = index;
-    } else if (Array.isArray(index)) {
-      index.forEach(value => queryString += `${value},`);
-    } else {
-      return;
-    }
+    const items = (Array.isArray(index) ? index : [index]);
+    if (items.some(value => typeof value !== 'string')) throw 'Invalid indices';
+    const queryString = items.join(',');
+
     cy.getIndices(queryString).then((response) => {
       if(response.status === 404){
         this.importJSONMapping(indexMappingPath);
