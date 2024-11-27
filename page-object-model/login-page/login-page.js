@@ -1,4 +1,4 @@
-import { LOGIN_PAGE_ELEMENTS } from './login-page-elements'
+import { LOGIN_PAGE_ELEMENTS } from './login-page-elements.js'
 
 export class LoginPage {
     constructor(inputTestRunner) {
