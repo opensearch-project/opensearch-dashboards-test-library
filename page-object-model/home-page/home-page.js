@@ -1,4 +1,4 @@
-import { HOME_PAGE_ELEMENTS } from './page-elements'
+import { HOME_PAGE_ELEMENTS } from './page-elements.js'
 
 export class HomePage {
 
