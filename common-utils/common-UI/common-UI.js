@@ -27,13 +27,9 @@ export class CommonUI {
      *   * if `superDatePickerstartDatePopoverButton` is clicked, it will open the date selection dialog
      */
     this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"], [data-test-subj="superDatePickerShowDatesButton"]')
+        .first()
         .should('be.visible')
-        .invoke('attr', 'data-test-subj')
-        .then((testId) => {
-          this.testRunner.get(`[data-test-subj="${testId}"]`)
-              .should('be.visible')
-              .click();
-        });
+        .click();
 
     /* While we surely are in the date selection mode, we don't know if the date selection dialog
      * is open or not. Looking for a tab and if it is missing, click on the dialog opener.
@@ -46,14 +42,14 @@ export class CommonUI {
       }
     });
 
-    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
-    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').should('be.visible').type(`{selectall}${start}`)
-    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').first().should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').first().should('be.visible').type(`{selectall}${start}`)
+    this.testRunner.get('[data-test-subj="superDatePickerstartDatePopoverButton"]').first().should('be.visible').click()
 
-    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
-    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('be.visible').click()
-    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').should('be.visible').type(`{selectall}${end}`)
-    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').first().should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').first().should('be.visible').click()
+    this.testRunner.get('[data-test-subj="superDatePickerAbsoluteDateInput"]').first().should('be.visible').type(`{selectall}${end}`)
+    this.testRunner.get('[data-test-subj="superDatePickerendDatePopoverButton"]').first().should('be.visible').click()
     this.testRunner.get('[data-test-subj="superDatePickerAbsoluteTab"]').should('not.exist')
 
     this.testRunner.get('[data-test-subj="querySubmitButton"]').should('be.visible').click()
