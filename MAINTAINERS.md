@@ -11,7 +11,6 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Tyler Ohlsen      | [ohltyler](https://github.com/ohltyler)             | Amazon      |
 | Cong Wang         | [CCongWang](https://github.com/CCongWang)           | Amazon      |
 | Manideep Pabba    | [mpabba3003](https://github.com/mpabba3003)         | Amazon      |
-| Ashwin P Chandran | [ashwin-pc](https://github.com/ashwin-pc)           | Amazon      |
 | Peter Zhu         | [peterzhuamazon](https://github.com/peterzhuamazon) | Amazon      |
 | Xuesong Luo       | [xluo-aws](https://github.com/xluo-aws)             | Amazon      |
 | Hailong Cui       | [Hailong-am](https://github.com/Hailong-am)         | Amazon      |
@@ -19,3 +18,9 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Yulong Ruan       | [ruanyl](https://github.com/ruanyl)                 | Amazon      |
 | Lin Wang          | [wanglam](https://github.com/wanglam)               | Amazon      |
 | Tianyu Gao        | [raintygao](https://github.com/raintygao)           | Amazon      |
+
+## Emeritus
+
+| Maintainer | GitHub ID |
+|---|---|
+| Ashwin P Chandran | [ashwin-pc](https://github.com/ashwin-pc) |
